@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="index.css" type="text/css">
     <script type="text/javascript" src="paper-full.js"></script>
     <script type="text/paperscript" canvas="myCanvas">
-	var path = new Path();
-	path.strokeColor = 'black';
-	var start = new Point(100, 100);
-	path.moveTo(start);
-	path.lineTo(start + [ 100, -50 ]);
+    function onKeyDown(event) {
+        var max = new Point(view.size.width, view.size.height);
+        var random = Point.random();
+        var point = max * random;
+        new Path.Circle(point, 10).fillColor = "yellow";
+    }
+
     </script>
 </head>
 <body>
