@@ -8,19 +8,41 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.core.min.js"></script>
     <script type="text/paperscript" canvas="myCanvas">
 
-    var sound = new Howl({
-        src: ['sounds/bubbles.mp3']
-    });
+    var data = {
+
+        a: {
+            color: "purple",
+            sound: new Howl({
+                src: ['sounds/bubbles.mp3']
+                })
+        },
+
+        b: {
+            color: "green",
+            sound: new Howl({
+                src: ['sounds/clay.mp3']
+                })
+        },
+
+        c: {
+            color: "blue",
+            sound: new Howl({
+                src: ['sounds/confetti.mp3']
+                })
+        }
+    }
 
     var circles = [];
     function onKeyDown(event) {
-        sound.play();
-        var max = new Point(view.size.width, view.size.height);
-        var random = Point.random();
-        var point = max * random;
-        var newCircle = new Path.Circle(point, 500);
-        newCircle.fillColor = "yellow";
-        circles.push(newCircle);
+        if(data[event.key]){
+            var max = new Point(view.size.width, view.size.height);
+            var random = Point.random();
+            var point = max * random;
+            var newCircle = new Path.Circle(point, 500);
+            newCircle.fillColor = data[event.key].color;
+            data[event.key].sound.play();
+            circles.push(newCircle);
+        }
     }
 
     function onFrame(event){
